@@ -1,3 +1,5 @@
+import contectlib
+import csv
 import unittest
 import os
 import sys
@@ -7,9 +9,19 @@ from writemetricscommand import *
 
 class TestMetricsWriter(unittest.TestCase):
 
-    def test_fileExists(self):
-        x = WriteMetricsCommand('metrics.csv')
-        self.assertTrue(os.path.isfile('metrics.csv'))
+    def setup():
+        with contextlib.suppress(FileNotFoundError)
+            os.remove('metrics.csv')
+
+    def column_headers_are_written_correctly(self):
+        cut = WriteMetricsCommand('metrics.csv')
+        cut.writeheader()
+
+        with os.path.open('metrics.csv', newline='') as csvfile
+            reader = csv.reader(csvfile)
+            linecount = sum(1 for line in reader)
+            self.assertEqual(linecount, 1)
+
 
 if __name__ == '__main__':
     unittest.main()
