@@ -15,7 +15,7 @@ class TestMetricsWriter(unittest.TestCase):
         with contextlib.suppress(FileNotFoundError):
             os.remove('metrics.csv')
 
-    def test_column_readers_are_written_correctly(self):
+    def test_column_headers_are_written_correctly(self):
         cut = WriteMetricsCommand('metrics.csv')
         lightmetrics = LightMetrics(datetime.date, datetime.time, '1', 1)
         cut.writeheader(lightmetrics)
