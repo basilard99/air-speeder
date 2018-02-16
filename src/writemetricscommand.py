@@ -14,3 +14,8 @@ class WriteMetricsCommand:
         with open(self.__filepath, 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(metricsdefinition.__dict__.keys())
+
+    def writedata(self, metricsdefinition):
+        with open(self.__filepath, 'a', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(metricsdefinition.__dict__.values())
